@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import "./App.css";
+import "./styles/app.scss";
 import Weather from "./components/Weather";
 
 function App() {
@@ -30,36 +30,43 @@ function App() {
 
   const getSearch = (e) => {
     e.preventDefault();
+    if (search === "") {
+      return alert("Enter Your City!!!");
+    }
+
     setQuery(search);
     setSearch("");
   };
 
   return (
-    <div className="App">
-      <form onSubmit={getSearch}>
-        <label>
-          <input
-            type="text"
-            placeholder="Enter Your City..."
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
+    <>
+      <div className="App">
+        <div className="container">
+          <form onSubmit={getSearch} className="form">
+            <label>
+              <input
+                type="text"
+                placeholder="Enter Your City..."
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+              />
+              <button className="btn">Search</button>
+            </label>
+          </form>
+          <Weather
+            cityName={cityName.name}
+            temperature={temp.temp}
+            humidity={temp.humidity}
+            weather={weathers.map((weather) => weather.description)}
+            main={weathers.map((weather) => weather.main)}
+            sunrise={sun.sunrise}
+            sunset={sun.sunset}
+            country={sun.country}
+            wind={wind.speed}
           />
-          <button className="btn">search</button>
-        </label>
-      </form>
-      <Weather
-        cityName={cityName.name}
-        temperature={temp.temp}
-        humidity={temp.humidity}
-        weather={weathers.map((weather) => weather.description)}
-        main={weathers.map((weather) => weather.main)}
-        sunrise={sun.sunrise}
-        sunset={sun.sunset}
-        country={sun.country}
-        wind={wind.speed}
-      />
-      ;
-    </div>
+        </div>
+      </div>
+    </>
   );
 }
 

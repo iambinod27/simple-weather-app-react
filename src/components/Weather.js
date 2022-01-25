@@ -1,4 +1,5 @@
 import React from "react";
+import "../styles/weather.scss";
 
 function Weather({
   cityName,
@@ -17,20 +18,26 @@ function Weather({
 
   return (
     <>
-      <div>
+      <header>
         <h1>
           {cityName}, {country}
         </h1>
-        <h2>{main}</h2>
-        <p>{weather}</p>
-        <p>
-          temperature: {celsius} C / {fahrenheit} F
-        </p>
-        <p>Humidity : {humidity} %</p>
-        <p>sunrise: {sunrise}</p>
-        <p>sunset : {sunset}</p>
-        <p>wind : {mph} mph</p>
-      </div>
+        <h2>
+          Weather : {main}, {weather}
+        </h2>
+      </header>
+      <section>
+        <h2>
+          <i className="fas fa-temperature-low"></i>
+          Temperature: {celsius}&deg;C / {fahrenheit}&deg;F
+        </h2>
+        <ul>
+          <li>Humidity : {humidity} %</li>
+          <li>Sunrise: {sunrise}</li>
+          <li>Sunset : {sunset}</li>
+          <li>Wind : {mph} mph</li>
+        </ul>
+      </section>
     </>
   );
 }
