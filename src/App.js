@@ -8,6 +8,7 @@ function App() {
   const [weathers, setWeathers] = useState([]);
   const [sun, setSun] = useState([]);
   const [wind, setWind] = useState([]);
+  const [error, setError] = useState();
 
   const [search, setSearch] = useState("");
   const [query, setQuery] = useState("Kathmandu");
@@ -17,16 +18,25 @@ function App() {
       `http://api.openweathermap.org/data/2.5/weather?q=${query}&appid=40185ec46c31216c911aef8c2b9788e1`
     );
     const data = await response.json();
-    setCityName(data);
-    setTemp(data.main);
-    setWeathers(data.weather);
-    setSun(data.sys);
-    setWind(data.wind);
+
+    if (!data.name) {
+      alert("city not found");
+    } else {
+      setCityName(data);
+      setTemp(data.main);
+      setWeathers(data.weather);
+      setSun(data.sys);
+      setWind(data.wind);
+    }
   };
 
   useEffect(() => {
     getWeather();
   }, [query]);
+
+  const getCity = (e) => {
+    return setSearch(e.target.value);
+  };
 
   const getSearch = (e) => {
     e.preventDefault();
@@ -48,7 +58,7 @@ function App() {
                 type="text"
                 placeholder="Enter Your City..."
                 value={search}
-                onChange={(e) => setSearch(e.target.value)}
+                onChange={getCity}
               />
               <button className="btn">Search</button>
             </label>

@@ -16,6 +16,19 @@ function Weather({
   const fahrenheit = Math.floor(((temperature - 273.15) * 9) / 5 + 31);
   const mph = Math.floor(wind * 2.237);
 
+  const converter = (unix) => {
+    const date = new Date(unix * 1000);
+    const hours = date.getHours();
+    const minutes = "0" + date.getMinutes();
+    const seconds = "0" + date.getSeconds();
+    const formattedTime = `${hours} : ${minutes.substr(-2)} : ${seconds.substr(
+      -2
+    )}`;
+    return formattedTime;
+  };
+
+  const rise = converter(sunrise);
+  const set = converter(sunset);
   return (
     <>
       <header>
@@ -32,10 +45,18 @@ function Weather({
           Temperature: {celsius}&deg;C / {fahrenheit}&deg;F
         </h2>
         <ul>
-          <li>Humidity : {humidity} %</li>
-          <li>Sunrise: {sunrise}</li>
-          <li>Sunset : {sunset}</li>
-          <li>Wind : {mph} mph</li>
+          <li>
+            Humidity <p> {humidity} %</p>
+          </li>
+          <li>
+            Sunrise <p>{rise}</p>
+          </li>
+          <li>
+            Sunset <p>{set}</p>
+          </li>
+          <li>
+            Wind <p>{mph} mph</p>
+          </li>
         </ul>
       </section>
     </>
