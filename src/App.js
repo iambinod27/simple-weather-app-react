@@ -8,7 +8,6 @@ function App() {
   const [weathers, setWeathers] = useState([]);
   const [sun, setSun] = useState([]);
   const [wind, setWind] = useState([]);
-  const [error, setError] = useState();
 
   const [search, setSearch] = useState("");
   const [query, setQuery] = useState("Kathmandu");
@@ -63,6 +62,7 @@ function App() {
               <button className="btn">Search</button>
             </label>
           </form>
+
           <Weather
             cityName={cityName.name}
             temperature={temp.temp}

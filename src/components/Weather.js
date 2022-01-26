@@ -29,6 +29,7 @@ function Weather({
 
   const rise = converter(sunrise);
   const set = converter(sunset);
+
   return (
     <>
       <header>
